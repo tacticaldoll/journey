@@ -1,0 +1,7 @@
+{{- $image := .Params.image | default "" -}}
+{{- if and $image (not (urls.Parse $image).IsAbs) -}}
+  {{- with .Resources.GetMatch $image -}}
+    {{- $image = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- dict "title" .Title "url" (replace .RelPermalink "index.json" "") "date" (.Date.Format "2006-01-02") "summary" (.Summary | plainify | replaceRE "\\s+" " ") "tags" (.Params.tags | default slice) "series" (.Params.series | default slice) "author" (.Params.author | default site.Params.author) "readingTime" .ReadingTime "wordCount" .WordCount "content" .Content "image" $image "layout_check" "single" | jsonify (dict "indent" "  ") -}}

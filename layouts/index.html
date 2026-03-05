@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default " en" }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Site.Title }}</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="{{ .Site.Params.description | default "" }}">
+  <meta name="author" content="{{ .Site.Params.author | default "" }}">
+  <meta property="og:title" content="{{ .Site.Title }}">
+  <meta property="og:description" content="{{ .Site.Params.description | default "" }}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts (Inter & Outfit) -->
+  <link rel="stylesheet" href="/vendor/css/google-fonts.css">
+
+  <!-- Core Vendor CSS (Dynamic loading from data/vendor.json) -->
+  {{- range .Site.Data.vendor.css -}}
+  <link href="/vendor/{{ .dest }}" rel="stylesheet">
+  {{- end -}}
+
+  <!-- Antigravity Design System -->
+  <link rel="stylesheet" href="/css/antigravity.css">
+
+  <!-- GitHub Pages SPA Hack - Part 2/Restore -->
+  <!-- Silently rewrite the URL to the correct path before Vue Router reads it -->
+  <script>
+    (({ search, hash }) => {
+      if (search[1] === 'p' && search[2] === '=') {
+        const base = '{{ .Site.BaseURL }}';
+        const q = search.slice(3).split('&q=');
+        let path = q[0];
+        if (base && path.startsWith(new URL(base).pathname)) {
+          // Prevent duplicating the base path if it was already included
+          path = path.replace(new URL(base).pathname, '/');
+        }
+        const searchStr = q[1] ? `?${q[1].replace(/~and~/g, '&')}` : '';
+        window.history.replaceState(null, null,
+          `${base}${path.charAt(0) === '/' ? path.slice(1) : path}${searchStr}${hash}`
+        );
+      }
+    })(window.location);
+  </script>
+
+  <script>
+    // Critical: Apply theme-specific colors to the splash screen before the first paint
+    (function () {
+      const savedTheme = localStorage.getItem('user-theme') || 'vibrant-light';
+      const isDark = savedTheme.endsWith('-dark');
+      const root = document.documentElement;
+      if (isDark) {
+        root.style.setProperty('--splash-bg', '#121212');
+        root.style.setProperty('--splash-text', '#FFFFFF');
+      } else {
+        root.style.setProperty('--splash-bg', '#F4F7F9');
+        root.style.setProperty('--splash-text', '#000000');
+      }
+    })();
+  </script>
+
+  <style>
+    /* Prevent FOUC (Flash of Unstyled Content) before Vue loads */
+    [v-cloak] {
+      display: none;
+    }
+
+    /* Basic reset and prevent scrollbar jumping */
+    html {
+      overflow-y: scroll;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+  </style>
+
+
+  <!-- Global Vendor Scripts (Dynamic loading from data/vendor.json) -->
+  <!-- Ensure plug-and-play functionality without complex ESM config -->
+  {{- range .Site.Data.vendor.js -}}
+  <script src="/vendor/{{ .dest }}"></script>
+  {{- end -}}
+
+  <!-- Custom User Injection Hooks -->
+  {{- range .Site.Params.customCSS -}}
+  <link rel="stylesheet" href="{{ relURL . }}">
+  {{- end -}}
+  {{- partial "head-custom.html" . -}}
+</head>
+
+<body>
+  <!-- Loading Guide (Splash Screen) Overlay -->
+  <div id="loading-guide">
+    <div class="loading-content">
+      <div class="loading-title">{{ .Site.Title | default "" }}</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar-indeterminate"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPA Root Node -->
+  <div id="app" v-cloak></div>
+
+  <!-- Inject Dynamic Component Templates -->
+  {{- partial "comments-template.html" . -}}
+  {{- partial "footer-custom.html" . -}}
+  {{- partial "home-banner-custom.html" . -}}
+  {{- partial "about-custom.html" . -}}
+
+  <!-- Mount Vue App -->
+  <script type="module" src="/js/main.js"></script>
+</body>
+
+</html>

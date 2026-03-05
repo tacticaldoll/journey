@@ -1,0 +1,34 @@
+{{- $list := slice -}}
+{{- if or (eq .Kind "taxonomy") (eq .Kind "taxonomyTerm") -}}
+  {{- range .Data.Terms.Alphabetical -}}
+    {{- $item := dict "title" .Page.Title "url" (replace .Page.RelPermalink "index.json" "") "count" .Count -}}
+    {{- $list = $list | append $item -}}
+  {{- end -}}
+{{- else if eq .Kind "term" -}}
+  {{- $pages := .Pages -}}
+  {{- if eq (len $pages) 0 -}}
+    {{- $tax := index site.Taxonomies .Data.Plural .Data.Term -}}
+    {{- if $tax -}} {{- $pages = $tax.Pages -}} {{- end -}}
+  {{- end -}}
+  {{- if eq (len $pages) 0 -}}
+    {{- $pages = where site.RegularPages (printf "Params.%s" .Data.Plural) "intersect" (slice .Title) -}}
+  {{- end -}}
+  {{- range $pages -}}
+    {{- $image := .Params.image | default "" -}}
+    {{- if and $image (not (urls.Parse $image).IsAbs) -}}
+      {{- with .Resources.GetMatch $image -}} {{- $image = .RelPermalink -}} {{- end -}}
+    {{- end -}}
+    {{- $item := dict "title" .Title "url" (replace .RelPermalink "index.json" "") "date" (.Date.Format "2006-01-02") "summary" (.Summary | plainify | replaceRE "\\s+" " ") "tags" (.Params.tags | default slice) "series" (.Params.series | default slice) "image" $image -}}
+    {{- $list = $list | append $item -}}
+  {{- end -}}
+{{- else -}}
+  {{- range .RegularPages -}}
+    {{- $image := .Params.image | default "" -}}
+    {{- if and $image (not (urls.Parse $image).IsAbs) -}}
+      {{- with .Resources.GetMatch $image -}} {{- $image = .RelPermalink -}} {{- end -}}
+    {{- end -}}
+    {{- $item := dict "title" .Title "url" (replace .RelPermalink "index.json" "") "date" (.Date.Format "2006-01-02") "summary" (.Summary | plainify | replaceRE "\\s+" " ") "tags" (.Params.tags | default slice) "series" (.Params.series | default slice) "image" $image -}}
+    {{- $list = $list | append $item -}}
+  {{- end -}}
+{{- end -}}
+{{- dict "title" .Title "list" $list | jsonify (dict "indent" "  ") -}}

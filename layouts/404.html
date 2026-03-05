@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA Hack - Part 1/Redirect
+    // This script takes the current URL and converts it to a query parameter.
+    // E.g. https://domain.com/repo/foo/bar -> https://domain.com/repo/?p=/foo/bar
+
+    const pathSegmentsToKeep = 0; // Set to 1 if repo name is in the path (e.g. /reponame/)
+    // However, Hugo's .Site.BaseURL handles the subdirectory correctly.
+
+    // Calculate the base path from Hugo's BaseURL config
+    const baseURL = "{{ .Site.BaseURL }}";
+    const baseURLPath = new URL(baseURL).pathname;
+
+    // Get the path that caused the 404, removing the BaseURL part if present
+    const l = window.location;
+
+    const pathArray = l.pathname.split('/');
+    const pathSegment = pathArray.slice(baseURLPath.split('/').length - 1).join('/') + (l.search ? `&q=${l.search.slice(1).replace(/&/g, '~and~')}` : "") + l.hash;
+
+    const newUrl = `${baseURL}?p=/${pathSegment}`;
+
+    l.replace(newUrl);
+  </script>
+</head>
+
+<body>
+  <!-- Fallback if JS is disabled -->
+  <p>Please <a href="{{ .Site.BaseURL }}">click here</a> to be redirected to the homepage.</p>
+</body>
+
+</html>

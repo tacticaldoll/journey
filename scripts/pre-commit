@@ -1,0 +1,21 @@
+#!/bin/sh
+# pre-commit hook to verify vendor dependencies and prevent corrupted commmits.
+
+echo "======================================================"
+echo "    Running pre-commit Enterprise Architecture Audit  "
+echo "======================================================"
+
+echo "1. Verifying Zero External Dependencies (Vendor Integrity)..."
+python scripts/verify-vendor.py
+
+if [ $? -ne 0 ]; then
+    echo "======================================================"
+    echo "❌ [ERROR] Vendor verification failed. Commit aborted."
+    echo "Please ensure you have not manually edited files in static/vendor/."
+    echo "To update dependencies, edit data/vendor.json and run scripts/download-vendor.py."
+    echo "======================================================"
+    exit 1
+fi
+
+echo "✅ [SUCCESS] Architecture audit passed. Proceeding with commit..."
+exit 0
