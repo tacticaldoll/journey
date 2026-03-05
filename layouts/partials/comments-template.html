@@ -1,0 +1,21 @@
+<!-- 
+    comments-template.html
+    This partial defines the Vue component template for the commenting system.
+    Site owners can override this file in their own layouts/partials/ to provide
+    a custom commenting integration (e.g., Giscus, Utterances) while maintaining
+    the theme's SPA architecture.
+
+    The component receives the following props from PostView.js:
+    - shortname (String): The Disqus shortname (or custom identifier)
+    - pageUrl (String): The canonical URL of the current page
+    - pageIdentifier (String): A unique identifier for the page (the route path)
+-->
+<script type="text/x-template" id="comments-template">
+  <!-- 
+    Override this partial in your site root (layouts/partials/comments-template.html)
+    to provide a custom commenting system (e.g., Giscus, Utterances).
+    
+    The theme emits a 'site-comments-load' event on 'window' when comments should be 
+    initialized or reset. See exampleSite for a Disqus reference implementation.
+  -->
+</script>

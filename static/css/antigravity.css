@@ -1,0 +1,959 @@
+/* 
+ * Antigravity Design System v2.0 (State-of-the-Art)
+ * A premium, organic, and deeply layered design language.
+ */
+
+/* 0. Premium Scrollbar System */
+html,
+body,
+.v-application {
+    /* Stabilize scrollbar to prevent mask jitter: force persistent space */
+    --v-scrollbar-offset: 0px !important;
+    overflow-y: scroll !important;
+}
+
+:root {
+    --splash-bg: #F4F7F9;
+    --splash-text: #000000;
+}
+
+/* Loading Guide (Splash Screen) Styles */
+#loading-guide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--splash-bg);
+    color: var(--splash-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+}
+
+.loading-content {
+    text-align: center;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.loading-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #673AB7, #00BFA5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.loading-bar-container {
+    width: 200px;
+    height: 4px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-bar-indeterminate {
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg, #673AB7, #00BFA5);
+    border-radius: 10px;
+    position: absolute;
+    animation: progress-loading 1.5s infinite ease-in-out;
+}
+
+@keyframes progress-loading {
+    0% {
+        left: -40%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.loading-guide-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(var(--v-theme-on-surface), 0.12);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-radius: var(--radius-md);
+    transition: background 0.3s ease;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--v-theme-on-surface), 0.2);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+/* Global Selection & Focus */
+::selection {
+    background: rgba(var(--v-theme-primary), 0.2);
+    color: inherit;
+}
+
+:root {
+    /* 1. Ultra-Refined Typography */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --letter-spacing-base: -0.011em;
+    --letter-spacing-heading: -0.022em;
+
+    /* 2. Motion & Easing (Cubic Bezier for premium feel) */
+    --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-main: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    --transition-fast: 0.2s ease;
+
+    /* 3. Advanced Glassmorphism & Depth */
+    --glass-blur: 20px;
+    --glass-bg-opacity: 0.75;
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-bg: rgba(var(--v-theme-surface), var(--glass-bg-opacity));
+    --noise-opacity: 0.03;
+
+    /* 4. Ambient Occlusion Shadow Architecture */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.06);
+    --shadow-xl: 0 32px 64px rgba(0, 0, 0, 0.16), 0 12px 24px rgba(0, 0, 0, 0.08);
+
+    /* 5. Surface & Border Radius System (SSOT) */
+    --radius-lg: 32px;
+    --radius-md: 16px;
+    --radius-sm: 8px;
+
+    /* 6. Mesh Gradient Seeds (Dynamic) */
+    --mesh-c1: rgba(103, 58, 183, 0.15);
+
+    /* Primary tint */
+    --mesh-c2: rgba(0, 191, 165, 0.15);
+    /* Secondary tint */
+
+    /* 7. Responsive Breakpoints (Refined) */
+    --breakpoint-content: 1000px;
+}
+
+.v-theme--dark {
+    --glass-bg-opacity: 0.60;
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --noise-opacity: 0.05;
+    --mesh-c1: rgba(103, 58, 183, 0.1);
+    --mesh-c2: rgba(0, 191, 165, 0.1);
+}
+
+
+/* 6. Radical Interactive Elements (v3.0) */
+@keyframes meshPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translate(-52%, -48%) scale(1.1);
+        opacity: 0.45;
+    }
+}
+
+#cursor-blob {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--mesh-c1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(80px);
+    opacity: 0.5;
+
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity;
+    transition: transform 0.15s ease-out;
+    animation: meshPulse 8s infinite ease-in-out;
+}
+
+.parallax-text {
+    position: fixed;
+    font-size: 15vw;
+    font-weight: 950;
+    color: var(--mesh-c1);
+    opacity: 0.04;
+    z-index: -3;
+    white-space: nowrap;
+
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+/* Base Headings Polish */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    letter-spacing: var(--letter-spacing-heading);
+    margin: 0;
+}
+
+/* 7. Post List Feed Architecture (Premium Technical Blog) */
+.post-list-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.post-list-item {
+    width: 100%;
+}
+
+@media (max-width: 960px) {
+    .post-list-feed {
+        gap: 24px;
+    }
+}
+
+/* Featured image sizing logic (Refined v2.0) */
+.post-card-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* Remove fixed height to allow flexbox to stretch to content */
+}
+
+.post-card-featured {
+    width: 100%;
+    transition: width var(--transition-main);
+    /* Ensure image has a base size in vertical mode */
+    aspect-ratio: 1.7778;
+}
+
+@media (min-width: 1000px) {
+    .post-card-inner {
+        flex-direction: row;
+    }
+
+    .post-card-featured {
+        width: 400px !important;
+        /* Force image to stretch to the height of the sibling container */
+        align-self: stretch;
+    }
+}
+
+/* PostCard Title Scalability */
+.post-card-title {
+    font-size: 1.5rem !important;
+    /* text-h5 fallback */
+    line-height: 1.4 !important;
+}
+
+@media (min-width: 1000px) {
+    .post-card-title {
+        font-size: 2.125rem !important;
+        /* text-h4 */
+    }
+}
+
+/* 8. Global Aesthetic Foundations */
+body {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    background: rgb(var(--v-theme-background));
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Atmospheric Mesh Gradient Layer */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background:
+        radial-gradient(at 0% 0%, var(--mesh-c1) 0, transparent 50%),
+        radial-gradient(at 100% 0%, var(--mesh-c2) 0, transparent 50%),
+        radial-gradient(at 50% 100%, var(--mesh-c1) 0, transparent 50%);
+    filter: blur(80px);
+    z-index: -2;
+    pointer-events: none;
+    animation: mesh-float 20s infinite alternate ease-in-out;
+}
+
+/* Frosted Noise Texture Overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: var(--noise-opacity);
+    z-index: -1;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+@keyframes mesh-float {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+
+    100% {
+        transform: scale(1.1) translate(2%, 2%);
+    }
+}
+
+/* 8. Global Aesthetic Foundations Continued */
+
+/* 9. Advanced Glassmorphism & Depth Layers */
+.glass-panel {
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-main);
+    will-change: backdrop-filter, background;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.fade-up {
+    animation: fadeUp var(--transition-slow) forwards;
+    will-change: opacity, transform;
+}
+
+/* 10. Premium Card & Interaction Architecture */
+.v-card--hover-lift {
+    transition: transform var(--transition-main), box-shadow var(--transition-main), border-color var(--transition-main) !important;
+    border: 1px solid var(--glass-border) !important;
+    position: relative;
+    overflow: hidden;
+    /* 3D Tilt container */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    /* Fix square artifacts by removing inherit which was pulling from bento-grid */
+    will-change: transform;
+}
+
+.v-card--hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl) !important;
+    border-color: rgba(var(--v-theme-primary), 0.4) !important;
+}
+
+/* Glass Inner Glow effect */
+.v-card--hover-lift::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(var(--v-theme-primary), 0.05), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-main);
+    pointer-events: none;
+    border-radius: inherit !important;
+}
+
+.v-card--hover-lift:hover::before {
+    opacity: 1;
+}
+
+/* Interactive Holographic Sweep Effect */
+.v-card--hover-lift::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(45deg,
+            transparent 45%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 55%);
+    transition: var(--transition-slow);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: inherit !important;
+}
+
+.v-card--hover-lift:hover::after {
+    top: -50%;
+    left: -50%;
+}
+
+/* Premium Image Interaction within List */
+.post-list-item:hover .v-img__img {
+    transform: scale(1.05);
+}
+
+.post-list-item .v-img__img {
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 11. Markdown Content Enhancements */
+.markdown-body {
+    line-height: 1.8;
+    color: rgba(var(--v-theme-on-surface), 0.87);
+    font-size: 1.125rem;
+    font-variant-ligatures: common-ligatures;
+    letter-spacing: var(--letter-spacing-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.markdown-body p {
+    margin-bottom: 1.5rem;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-heading);
+}
+
+.v-theme--dark .markdown-body h1,
+.v-theme--dark .markdown-body h2,
+.v-theme--dark .markdown-body h3 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.markdown-body li {
+    margin-bottom: 0.5rem;
+}
+
+.img-hover-zoom {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-hover-zoom:hover {
+    transform: scale(1.015);
+    box-shadow: var(--shadow-xl) !important;
+}
+
+.markdown-image-wrapper {
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: fit-content;
+}
+
+
+.markdown-image-wrapper img {
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+.markdown-body img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    display: block;
+    cursor: zoom-in;
+    transform-origin: center center;
+}
+
+.markdown-body figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.markdown-body figcaption {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.markdown-body blockquote {
+    border-left: 4px solid rgb(var(--v-theme-primary));
+    background: rgba(var(--v-theme-primary), 0.05);
+    padding: 1.5rem 2rem;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: 2rem 0;
+    font-style: italic;
+}
+
+
+/* 12. Premium Code Block Enhancements */
+.markdown-body .highlight {
+    position: relative;
+    margin: 2.5rem 0;
+    border-radius: var(--radius-md);
+    background: #1e1e1e !important;
+
+    /* Premium dark background */
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+}
+
+/* Mac-like window controls */
+.markdown-body .highlight::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 1.25rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f56;
+    box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.markdown-body .highlight pre {
+    margin: 0 !important;
+    padding: 3.5rem 1.5rem 1.5rem 1.5rem !important;
+    /* Space for the mac buttons and label */
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+
+    background: transparent !important;
+    /* Override Hugo defaults */
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* The dynamic language label extracted from Hugo's data-lang */
+.markdown-body .highlight pre code[data-lang]::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 1.2rem;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom-left-radius: var(--radius-md);
+    pointer-events: none;
+
+    user-select: none;
+    z-index: 3;
+    letter-spacing: 0.1em;
+}
+
+.markdown-body .highlight pre code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* 13. Readability & Focus Overrides */
+/* Suppress default browser outline on pointer-driven interactions */
+.v-chip:focus:not(:focus-visible),
+.v-card--hover-lift:focus:not(:focus-visible) {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Restore visible focus ring for keyboard navigation (accessibility) */
+.v-chip:focus-visible {
+    outline: 2px solid rgb(var(--v-theme-primary)) !important;
+    outline-offset: 2px !important;
+}
+
+.v-card--hover-lift:focus-visible {
+    outline: 2px solid rgb(var(--v-theme-primary)) !important;
+    outline-offset: 4px !important;
+    border-color: rgba(var(--v-theme-primary), 0.5) !important;
+}
+
+/* Tier-B interaction unified with Tier-A for consistency */
+/* Added padding-top to containers to prevent 'lift' from clipping against top bounds */
+.postcard-meta,
+.post-meta-container,
+.v-card-text,
+.v-card-subtitle {
+    padding-top: 4px !important;
+    margin-top: -4px !important;
+}
+
+.postcard-meta .v-chip:hover,
+.post-meta-container .v-chip:hover,
+.v-card-text .v-chip:hover,
+.v-card-subtitle .v-chip:hover {
+    cursor: pointer;
+}
+
+/* Ensure interactive elements within subtitles retain full visual hierarchy */
+.v-card-subtitle .v-chip,
+.postcard-meta .v-chip {
+    opacity: 1 !important;
+}
+
+/* 14. UI Component Overrides & Dark Mode Refinements */
+
+/* [Dark Mode] Replace harsh white holographic sweep with primary-tinted sweep */
+.v-theme--dark .v-card--hover-lift::after {
+    background: linear-gradient(45deg,
+            transparent 45%,
+            rgba(var(--v-theme-primary), 0.18) 50%,
+            transparent 55%);
+}
+
+/* [Dark Mode] Shift inner glow from raw gradient to a primary-tinted glow */
+.v-theme--dark .v-card--hover-lift::before {
+    background: linear-gradient(135deg, rgba(var(--v-theme-primary), 0.12), transparent);
+}
+
+
+/* Premium Button Architecture */
+.v-btn {
+    border-radius: var(--radius-md) !important;
+    /* Unified with Chips/Pagination */
+
+    text-transform: none !important;
+    letter-spacing: 0.02em !important;
+    font-weight: 700 !important;
+    transition: var(--transition-main) !important;
+}
+
+/* Elevated/Primary Buttons Overrides */
+.v-btn--elevated,
+.v-btn--variant-elevated {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.v-btn--elevated:hover,
+.v-btn--variant-elevated:hover {
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px);
+}
+
+/* Premium Inputs - Safe Glassmorphism (Preserves Notch) */
+.v-field--variant-outlined {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+    border-radius: var(--radius-md) !important;
+    transition: var(--transition-main) !important;
+}
+
+.v-field--variant-outlined .v-field__outline {
+    --v-field-border-opacity: 1 !important;
+    color: var(--glass-border) !important;
+}
+
+.v-field--focused.v-field--variant-outlined .v-field__outline {
+    color: rgb(var(--v-theme-primary)) !important;
+    --v-field-border-width: 2px !important;
+}
+
+.v-field--variant-outlined .v-label.v-field-label--floating {
+    /* Subtle adjustment to avoid collision with thick borders if needed, 
+       but keeping it standard enough for stability */
+    background: transparent !important;
+}
+
+/* Footer Legibility */
+.v-footer {
+    border-top: 1px solid var(--glass-border) !important;
+}
+
+.v-theme--dark .v-footer {
+    background: rgba(20, 20, 20, 0.95) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.v-theme--dark .v-footer .opacity-70 {
+    opacity: 0.95 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.v-theme--dark .v-footer .v-btn {
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* -----------------------------------------
+   14. Native Material Components Upgrade
+   ----------------------------------------- */
+
+/* Premium Lists & Menus — scoped to navigation contexts */
+.v-list {
+    border-radius: var(--radius-md) !important;
+}
+
+
+/* Apply spacing and lift only for navigation drawer/menu lists, not dense result lists */
+.v-navigation-drawer .v-list-item,
+.v-menu .v-list-item {
+    border-radius: var(--radius-md) !important;
+    margin: 4px 8px !important;
+
+    transition: var(--transition-main) !important;
+}
+
+.v-navigation-drawer .v-list-item:hover,
+.v-menu .v-list-item:hover {
+    transform: translateY(-2px);
+    background: rgba(var(--v-theme-primary), 0.1) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Organic Pagination */
+.v-pagination__item,
+.v-pagination__navigation {
+    border-radius: var(--radius-md) !important;
+    /* Increased for harmony */
+
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: var(--transition-main) !important;
+    margin: 0 4px !important;
+}
+
+.v-pagination__item:hover,
+.v-pagination__navigation:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md) !important;
+    border-color: rgba(var(--v-theme-primary), 0.3) !important;
+}
+
+/* Elevated Chips / Tags */
+.v-chip {
+    border-radius: var(--radius-md) !important;
+    /* Unified with Buttons/Pagination */
+
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    font-weight: 600 !important;
+    transition: transform var(--transition-main), box-shadow var(--transition-main) !important;
+    /* Ensure chips don't push layout when lifting */
+    margin: 4px 8px 4px 0 !important;
+    vertical-align: middle;
+    /* Rendering Stability: Prevent text jitter and blur during transform */
+    backface-visibility: hidden;
+    transform: perspective(1px) translateY(0);
+    will-change: transform;
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Only apply blur to standalone chips, not inside cards (avoids double-blur) */
+.v-chip:not(.v-card *) {
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+}
+
+.v-chip:hover {
+    transform: perspective(1px) translateY(-2px);
+    border-color: rgba(var(--v-theme-primary), 0.5) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Secondary Chip Hover Refinement */
+.v-chip.text-secondary:hover {
+    border-color: rgba(var(--v-theme-secondary), 0.5) !important;
+}
+
+
+/* Accessibility: Boost tonal chip background opacity in light mode for higher contrast */
+:root:not(.v-theme--dark) .v-chip--variant-tonal .v-chip__underlay {
+    opacity: 0.22 !important;
+}
+
+:root:not(.v-theme--dark) .v-chip--variant-tonal:hover .v-chip__underlay {
+    opacity: 0.3 !important;
+}
+
+.v-theme--dark .v-chip {
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.v-theme--dark .v-chip:hover {
+    transform: perspective(1px) translateY(-2px);
+    border-color: rgba(var(--v-theme-primary), 0.5) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.v-theme--dark .v-chip.text-secondary:hover {
+    border-color: rgba(var(--v-theme-secondary), 0.5) !important;
+}
+
+
+/* Alerts & Skeleton Loaders */
+.v-alert {
+    border-radius: var(--radius-md) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.v-skeleton-loader {
+    border-radius: var(--radius-lg) !important;
+    overflow: hidden !important;
+}
+
+
+/* 16. SSOT & Structural Improvements */
+
+/* AppBar border managed by CSS (SSOT — removes inline-style dependency in App.js) */
+.sticky-nav.v-app-bar {
+    border-bottom: 1px solid var(--glass-border) !important;
+}
+
+/* Card image radius — left-side for horizontal layout, top for vertical */
+.v-card--hover-lift .v-img {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+    /* Matches rounded-3xl */
+
+    transition: var(--transition-main);
+}
+
+@media (min-width: 1000px) {
+    .v-card--hover-lift.flex-row .v-img {
+        border-radius: var(--radius-lg) 0 0 var(--radius-lg) !important;
+    }
+}
+
+
+/* Dark mode card border depth: soften glass-border for deep palettes */
+.v-theme--dark .v-card--hover-lift {
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.v-theme--dark .v-card--hover-lift:hover {
+    border-color: rgba(var(--v-theme-primary), 0.4) !important;
+    box-shadow: 0 12px 24px -10px var(--mesh-c1) !important;
+}
+
+
+/* 17. Card Depth & Transparency System */
+
+/* Add resting shadow to all hover-lift cards */
+.v-card--hover-lift {
+    box-shadow: var(--shadow-sm) !important;
+    transition: var(--transition-main), box-shadow 0.4s ease !important;
+}
+
+.v-card--hover-lift:hover {
+    box-shadow: 0 16px 32px -12px var(--mesh-c1) !important;
+}
+
+
+/* Glassmorphism: allow background mesh to show through card surface */
+.v-card--hover-lift.v-card {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+}
+
+
+/* 19. Premium Link Architecture */
+a {
+  color: rgb(var(--v-theme-primary));
+  text-decoration: none;
+  transition: var(--transition-main);
+}
+
+.markdown-body a {
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 0 rgba(var(--v-theme-primary), 0.15);
+  padding: 0 2px;
+  margin: 0 -2px;
+  border-radius: 2px;
+}
+
+.markdown-body a:hover {
+  box-shadow: inset 0 -2.5rem 0 0 rgba(var(--v-theme-primary), 0.08);
+  color: rgb(var(--v-theme-primary));
+}
+
+.v-theme--dark .markdown-body a {
+  box-shadow: inset 0 -2px 0 0 rgba(var(--v-theme-primary), 0.3);
+}
+
+.v-theme--dark .markdown-body a:hover {
+  box-shadow: inset 0 -2.5rem 0 0 rgba(var(--v-theme-primary), 0.15);
+}
+
+/* 20. Vuetify Class Overrides for Unified Design */
+.rounded-3xl {
+    border-radius: var(--radius-lg) !important;
+}
+
+.rounded-xl {
+    border-radius: var(--radius-md) !important;
+}
+
+.rounded-pill {
+    border-radius: 9999px !important;
+}

@@ -1,24 +1,35 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-US'
-title = 'My New Hugo Project'
+name = 'journey'
+description = 'A premium SPA theme for technical bloggers'
 
-[menus]
-  [[menus.main]]
-    name = 'Home'
-    pageRef = '/'
-    weight = 10
+[mediaTypes]
+  [mediaTypes.'application/json']
+    suffixes = ['json']
 
-  [[menus.main]]
-    name = 'Posts'
-    pageRef = '/posts'
-    weight = 20
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = 'application/json'
+    baseName = 'index'
+    isPlainText = true
+    notAlternative = true
+  [outputFormats.SEARCHINDEX]
+    mediaType = 'application/json'
+    baseName = 'search-index'
+    isPlainText = true
+    notAlternative = true
 
-  [[menus.main]]
-    name = 'Tags'
-    pageRef = '/tags'
-    weight = 30
+[outputs]
+  taxonomy = ['JSON']
+  term     = ['JSON']
+  home     = ['HTML', 'JSON', 'SEARCHINDEX']
+  page     = ['JSON']
+  section  = ['JSON']
+
+[taxonomies]
+  tag = "tags"
+  series = "series"
 
 [module]
   [module.hugoVersion]
     extended = false
     min = '0.146.0'
+

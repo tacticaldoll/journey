@@ -1,0 +1,44 @@
+{
+    "fonts": [
+        {
+            "name": "Material Design Icons Font",
+            "url": "https://cdn.jsdelivr.net/npm/@mdi/font@7.0.96/fonts/materialdesignicons-webfont.woff2",
+            "dest": "fonts/materialdesignicons-webfont.woff2"
+        }
+    ],
+    "css": [
+        {
+            "name": "Material Design Icons",
+            "url": "https://cdn.jsdelivr.net/npm/@mdi/font@7.0.96/css/materialdesignicons.min.css",
+            "dest": "css/materialdesignicons.min.css"
+        },
+        {
+            "name": "Vuetify CSS",
+            "url": "https://cdn.jsdelivr.net/npm/vuetify@3.5.0/dist/vuetify.min.css",
+            "dest": "css/vuetify.min.css"
+        }
+    ],
+    "js": [
+        {
+            "name": "Vue 3",
+            "url": "https://unpkg.com/vue@3/dist/vue.global.prod.js",
+            "dest": "js/vue.global.prod.js"
+        },
+        {
+            "name": "Vue Router 4",
+            "url": "https://unpkg.com/vue-router@4/dist/vue-router.global.prod.js",
+            "dest": "js/vue-router.global.prod.js"
+        },
+        {
+            "name": "Vuetify JS",
+            "url": "https://cdn.jsdelivr.net/npm/vuetify@3.5.0/dist/vuetify.min.js",
+            "dest": "js/vuetify.min.js"
+        },
+        {
+            "name": "Fuse.js",
+            "url": "https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js",
+            "dest": "js/fuse.min.js"
+        }
+    ],
+    "google_fonts_url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap"
+}

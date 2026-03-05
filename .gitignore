@@ -1,0 +1,15 @@
+public/
+public_test/
+.vscode/
+.DS_Store
+tmp/
+*.log
+
+# Hugo build artifacts
+resources/
+.hugo_build.lock
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
