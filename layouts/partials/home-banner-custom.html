@@ -1,0 +1,28 @@
+<!-- 
+    home-banner-custom.html
+    This partial defines the Vue component template for the home banner hook.
+    Site owners can override this file in their own layouts/partials/ to provide
+    a custom hero banner implementation while maintaining the theme's SPA architecture.
+
+    The component receives the following props from HomeView.js:
+    - siteConfig (Object): The global configuration object
+-->
+<script type="text/x-template" id="home-banner-custom-template">
+  <v-card
+    style="background: linear-gradient(135deg, rgb(var(--v-theme-primary)) 0%, rgb(var(--v-theme-secondary)) 50%, rgb(var(--v-theme-primary)) 100%); background-size: 200% 200%;"
+    class="mb-10 elevation-12 rounded-xl text-white"
+  >
+    <v-card-text class="pa-10 text-center fade-up">
+      <v-icon size="80" class="mb-4 text-secondary">mdi-sparkles-outline</v-icon>
+      <h1
+        class="text-h2 font-weight-black mb-4"
+        style="font-family: var(--font-heading) !important; letter-spacing: -2px !important;"
+      >
+        {{ "{{" }} siteConfig.title || '' {{ "}}" }}
+      </h1>
+      <p class="text-h6 opacity-90 font-weight-regular">
+        {{ "{{" }} siteConfig.description || '' {{ "}}" }}
+      </p>
+    </v-card-text>
+  </v-card>
+</script>

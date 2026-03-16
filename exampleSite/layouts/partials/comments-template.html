@@ -1,0 +1,55 @@
+<script type="text/x-template" id="comments-template">
+  <div class="mt-12 pt-6" style="border-top: 1px solid rgba(128,128,128,0.2);">
+    <div id="disqus_thread"></div>
+  </div>
+</script>
+
+<script>
+  /**
+    * Disqus Reference Implementation for Journey Theme (SPA)
+    * This script listens for the 'site-comments-load' event emitted by the theme
+    * and initializes or resets the Disqus thread accordingly.
+    */
+  window.addEventListener('site-comments-load', (event) => {
+    const { pageUrl, pageIdentifier } = event.detail;
+
+    const shortname = '{{ .Site.Params.disqus.shortname | default "" }}';
+    const scope = {{ .Site.Params.disqus.scope | default (slice "/posts/") | jsonify | safeJS }};
+
+  // If no shortname is provided, do nothing
+  if (!shortname) return;
+
+  // Check if the current page is within the allowed scope
+  const isEnabled = scope.some(prefix => pageIdentifier.startsWith(prefix));
+
+  // Ensure the thread element exists
+  const thread = document.getElementById('disqus_thread');
+
+  // Hide thread if not enabled
+  if (!isEnabled) {
+    if (thread) thread.style.display = 'none';
+    return;
+  }
+
+  if (thread) thread.style.display = 'block';
+
+  // Define Disqus configuration
+  window.disqus_config = function () {
+    this.page.url = pageUrl;
+    this.page.identifier = pageIdentifier;
+  };
+
+  // If DISQUS is already loaded, reset it for the new route
+  if (window.DISQUS) {
+    window.DISQUS.reset({ reload: true, config: window.disqus_config });
+    return;
+  }
+
+  // Otherwise, load the Disqus embed script
+  const script = document.createElement('script');
+  script.src = `https://${shortname}.disqus.com/embed.js`;
+  script.setAttribute('data-timestamp', String(Date.now()));
+  script.async = true;
+  (document.head || document.body).appendChild(script);
+  });
+</script>

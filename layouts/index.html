@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default " en" }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Site.Title }}</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="{{ .Site.Params.description | default "" }}">
+  <meta name="author" content="{{ .Site.Params.author | default "" }}">
+  <meta property="og:title" content="{{ .Site.Title }}">
+  <meta property="og:description" content="{{ .Site.Params.description | default "" }}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts (Inter & Outfit) -->
+  <link rel="stylesheet" href="/vendor/css/google-fonts.css">
+
+  <!-- Core Vendor CSS (Dynamic loading from data/vendor.json) -->
+  {{- range .Site.Data.vendor.css -}}
+  <link href="/vendor/{{ .dest }}" rel="stylesheet">
+  {{- end -}}
+
+  <!-- Antigravity Design System -->
+  <link rel="stylesheet" href="/css/antigravity.css">
+
+  <!-- GitHub Pages SPA Hack - Part 2/Restore -->
+  <!-- Silently rewrite the URL to the correct path before Vue Router reads it -->
+  <script>
+    (({ search, hash }) => {
+      if (search[1] === 'p' && search[2] === '=') {
+        const base = '{{ .Site.BaseURL }}';
+        const q = search.slice(3).split('&q=');
+        let path = q[0];
+        if (base && path.startsWith(new URL(base).pathname)) {
+          // Prevent duplicating the base path if it was already included
+          path = path.replace(new URL(base).pathname, '/');
+        }
+        const searchStr = q[1] ? `?${q[1].replace(/~and~/g, '&')}` : '';
+        window.history.replaceState(null, null,
+          `${base}${path.charAt(0) === '/' ? path.slice(1) : path}${searchStr}${hash}`
+        );
+      }
+    })(window.location);
+  </script>
+
+  <script>
+    // Critical: Apply theme-specific colors to the splash screen before the first paint
+    (function () {
+      const themes = {
+        'vibrant': { lp: '#7C3AED', ls: '#10B981', dp: '#A78BFA', ds: '#34D399' },
+        'sunset': { lp: '#F43F5E', ls: '#F59E0B', dp: '#FB7185', ds: '#FBBF24' },
+        'forest': { lp: '#15803D', ls: '#84CC16', dp: '#4ADE80', ds: '#A3E635' },
+        'ocean': { lp: '#0369A1', ls: '#06B6D4', dp: '#38BDF8', ds: '#22D3EE' },
+        'nordic': { lp: '#475569', ls: '#0EA5E9', dp: '#94A3B8', ds: '#38BDF8' },
+        'espresso': { lp: '#78350F', ls: '#D97706', dp: '#B45309', ds: '#F59E0B' }
+      };
+      const savedTheme = localStorage.getItem('user-theme') || 'vibrant-light';
+      const isDark = savedTheme.endsWith('-dark');
+      const personality = savedTheme.replace('-light', '').replace('-dark', '');
+      const config = themes[personality] || themes['vibrant'];
+      
+      const root = document.documentElement;
+      root.classList.add(isDark ? 'v-theme--dark' : 'v-theme--light');
+
+      if (isDark) {
+        root.style.setProperty('--v-theme-primary', config.dp);
+        root.style.setProperty('--v-theme-secondary', config.ds);
+      } else {
+        root.style.setProperty('--v-theme-primary', config.lp);
+        root.style.setProperty('--v-theme-secondary', config.ls);
+      }
+    })();
+  </script>
+
+  <style>
+    /* Prevent FOUC (Flash of Unstyled Content) before Vue loads */
+    [v-cloak] {
+      display: none;
+    }
+
+    /* 
+       Fixed-Viewport Architecture (v3.3)
+       Permanently lock the body scroll to prevent windows jitter.
+       Move all scrolling to the #app container.
+    */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100% !important;
+      overflow: hidden !important;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--splash-bg);
+    }
+
+    /* Primary Framework Scroll Root */
+    #app {
+      height: 100dvh;
+      width: 100%;
+      overflow: hidden !important;
+      position: relative;
+    }
+
+    /* Moving scroll logic to Vuetify's root container */
+    .v-application {
+      height: 100dvh !important;
+      overflow-y: scroll !important;
+      overflow-x: hidden !important;
+      scrollbar-gutter: stable !important;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Splash Screen is fixed and covers the entire scrolling root */
+    #loading-guide {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: 9999;
+      background: var(--splash-bg);
+    }
+  </style>
+
+
+  <!-- Global Vendor Scripts (Dynamic loading from data/vendor.json) -->
+  <!-- Ensure plug-and-play functionality without complex ESM config -->
+  {{- range .Site.Data.vendor.js -}}
+  <script src="/vendor/{{ .dest }}"></script>
+  {{- end -}}
+
+  <!-- Custom User Injection Hooks -->
+  {{- range .Site.Params.customCSS -}}
+  <link rel="stylesheet" href="{{ relURL . }}">
+  {{- end -}}
+  {{- partial "head-custom.html" . -}}
+</head>
+
+<body>
+  <!-- Loading Guide (Splash Screen) Overlay -->
+  <div id="loading-guide">
+    <div class="loading-content">
+      <div class="loading-title">{{ .Site.Title | default "" }}</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar-indeterminate"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPA Root Node -->
+  <div id="app" v-cloak></div>
+
+  <!-- Inject Dynamic Component Templates -->
+  {{- partial "comments-template.html" . -}}
+  {{- partial "footer-custom.html" . -}}
+  {{- partial "home-banner-custom.html" . -}}
+  {{- partial "about-custom.html" . -}}
+
+  <!-- Mount Vue App -->
+  <script type="module" src="/js/main.js"></script>
+</body>
+
+</html>

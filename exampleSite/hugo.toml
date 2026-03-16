@@ -1,0 +1,66 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-US'
+title = 'My New Hugo Project'
+theme = 'journey'
+disableKinds = ["sitemap", "rss", "robotsTXT"]
+[pagination]
+  pagerSize = 5
+
+[outputs]
+  taxonomy = ['JSON']
+  term     = ['JSON']
+  home     = ['HTML', 'JSON', 'SEARCHINDEX']
+  page     = ['JSON']
+  section  = ['JSON']
+
+[taxonomies]
+  tag = 'tags'
+  series = 'series'
+
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+
+  [[menus.main]]
+    name = 'Posts'
+    pageRef = '/posts'
+    weight = 20
+
+  [[menus.main]]
+    name = 'Tags'
+    pageRef = '/tags'
+    weight = 30
+
+  [[menus.main]]
+    name = 'Search'
+    pageRef = '/search'
+    weight = 40
+
+[params]
+  author = "Journey Creator"
+  description = "A premium SPA theme for technical bloggers"
+
+  # Easily inject custom CSS styles without editing HTML templates
+  # Note: Place your custom file in `exampleSite/static/css/`
+  # customCSS = ["/css/my-custom-style.css"]
+
+  # Disqus Comments: configure the nested [params.disqus] table to enable comments.
+  [params.disqus]
+    shortname = "journey-demo"
+    scope = ["/posts/"]   # optional: defaults to ["/posts/"] if omitted
+  [params.social]
+    github = "https://github.com/tacticaldoll/journey"
+    twitter = "https://twitter.com"
+    linkedin = "https://linkedin.com"
+    facebook = "https://facebook.com"
+    instagram = "https://instagram.com"
+
+# Markup Renderer Override (Opt-in)
+# The Journey theme defaults to Hugo's safe renderer (unsafe = false).
+# Enable the setting below only if your Markdown content contains raw HTML.
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

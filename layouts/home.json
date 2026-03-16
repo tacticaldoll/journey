@@ -1,0 +1,22 @@
+{{- $posts := slice -}}
+{{- $postPages := where .Site.RegularPages "Section" "posts" -}}
+{{- range $postPages -}}
+  {{- $image := .Params.image | default "" -}}
+  {{- if and $image (not (urls.Parse $image).IsAbs) -}}
+    {{- with .Resources.GetMatch $image -}}
+      {{- $image = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $posts = $posts | append (dict "title" .Title "url" (replace .RelPermalink "index.json" "") "date" (.Date.Format "2006-01-02") "summary" (.Summary | plainify | replaceRE "\\s+" " ") "tags" (.Params.tags | default slice) "series" (.Params.series | default slice) "image" $image) -}}
+{{- end -}}
+{{- $menu := slice -}}
+{{- range .Site.Menus.main -}}
+  {{- $menu = $menu | append (dict "name" .Name "url" .URL "weight" .Weight) -}}
+{{- end -}}
+{{- $social := .Site.Params.social | default dict -}}
+{{- $disqusParams := .Site.Params.disqus | default dict -}}
+{{- $disqus := dict "shortname" ($disqusParams.shortname | default "") "scope" ($disqusParams.scope | default (slice "/posts/")) -}}
+{{- /* Get native Hugo pagination size */ -}}
+{{- $paginator := .Paginate $postPages -}}
+{{- $config := dict "title" .Site.Title "description" (.Site.Params.description | default "") "author" (.Site.Params.author | default "") "social" $social "menu" $menu "disqus" $disqus "paginate" $paginator.PagerSize -}}
+{{- dict "posts" $posts "config" $config | jsonify (dict "indent" "  ") -}}

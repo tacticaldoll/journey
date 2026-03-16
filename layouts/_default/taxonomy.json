@@ -1,0 +1,6 @@
+{{- $list := slice -}}
+{{- range .Data.Terms.Alphabetical -}}
+  {{- $item := dict "title" .Page.Title "url" (replace .Page.RelPermalink "index.json" "") "count" .Count -}}
+  {{- $list = $list | append $item -}}
+{{- end -}}
+{{- dict "title" .Title "list" $list | jsonify (dict "indent" "  ") -}}

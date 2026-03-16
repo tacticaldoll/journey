@@ -1,0 +1,980 @@
+/* 
+ * Antigravity Design System v2.0 (State-of-the-Art)
+ * A premium, organic, and deeply layered design language.
+ */
+
+:root {
+    --splash-bg: #F4F7F9;
+    --splash-text: #000000;
+}
+
+
+
+/* -----------------------------------------
+   Hardware Acceleration Utility (SSOT)
+   Applied to animated elevation components
+   ----------------------------------------- */
+body .v-card--hover-lift,
+body .post-list-item .v-img__img,
+.img-hover-zoom,
+body .v-btn,
+body .v-navigation-drawer .v-list-item,
+body .v-menu .v-list-item,
+body .v-pagination__item,
+body .v-pagination__navigation,
+body .v-chip {
+    will-change: transform, box-shadow;
+    transform: perspective(1px) translateZ(0);
+    backface-visibility: hidden;
+}
+/* Loading Guide (Splash Screen) Styles */
+#loading-guide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--splash-bg);
+    color: var(--splash-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-main), visibility 0.8s;
+}
+
+.loading-content {
+    text-align: center;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.loading-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--v-theme-primary), var(--v-theme-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.loading-bar-container {
+    width: 200px;
+    height: 4px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-bar-indeterminate {
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--v-theme-primary), var(--v-theme-secondary));
+    border-radius: var(--radius-sm);
+    position: absolute;
+    animation: progress-loading 1.5s infinite ease-in-out;
+}
+
+@keyframes progress-loading {
+    0% {
+        left: -40%;
+    }
+
+    100% {
+        left: 100%;
+    }
+body }
+
+.loading-guide-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Global Selection & Focus */
+::selection {
+    background: rgba(var(--v-theme-primary), 0.2);
+    color: inherit;
+}
+
+:root {
+    /* 1. Ultra-Refined Typography */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --letter-spacing-base: -0.011em;
+    --letter-spacing-heading: -0.022em;
+
+    /* 2. Motion & Easing (Cubic Bezier for premium feel) */
+    --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-main: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    --transition-fast: 0.2s ease;
+
+    /* 3. Advanced Glassmorphism & Depth */
+    --glass-blur: 20px;
+    --glass-bg-opacity: 0.75;
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-bg: rgba(var(--v-theme-surface), var(--glass-bg-opacity));
+    --noise-opacity: 0.03;
+
+    /* 4. Ambient Occlusion Shadow Architecture */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.06);
+    --shadow-xl: 0 32px 64px rgba(0, 0, 0, 0.16), 0 12px 24px rgba(0, 0, 0, 0.08);
+
+    /* 5. Surface & Border Radius System (SSOT) */
+    --radius-lg: 32px;
+    --radius-md: 16px;
+    --radius-sm: 8px;
+
+    /* 7. Responsive Breakpoints (Refined) */
+    --breakpoint-content: 1000px;
+}
+
+.v-theme--dark {
+    --splash-bg: #121212;
+    --splash-text: #FFFFFF;
+    --glass-bg-opacity: 0.60;
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --noise-opacity: 0.05;
+}
+
+/* Base Headings Polish */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    letter-spacing: var(--letter-spacing-heading);
+    margin: 0;
+}
+
+/* 7. Post List Feed Architecture (Premium Technical Blog) */
+.post-list-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.post-list-item {
+    width: 100%;
+}
+
+@media (max-width: 960px) {
+    .post-list-feed {
+        gap: 24px;
+    }
+}
+
+/* Featured image sizing logic (Refined v2.0) */
+.post-card-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* Remove fixed height to allow flexbox to stretch to content */
+}
+
+.post-card-featured {
+    width: 100%;
+    transition: width var(--transition-main);
+    /* Ensure image has a base size in vertical mode */
+    aspect-ratio: 1.7778;
+}
+
+@media (min-width: 1000px) {
+    .post-card-inner {
+        flex-direction: row;
+    }
+
+    body .post-card-featured {
+        width: 400px;
+        /* Force image to stretch to the height of the sibling container */
+        align-self: stretch;
+    }
+body }
+
+/* PostCard Title Scalability */
+.post-card-title {
+    font-size: 1.5rem;
+    /* text-h5 fallback */
+    line-height: 1.4;
+}
+
+@media (min-width: 1000px) {
+    body .post-card-title {
+        font-size: 2.125rem;
+        /* text-h4 */
+    }
+}
+
+/* 8. Global Aesthetic Foundations */
+body {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    background: rgb(var(--v-theme-background));
+    /* height: 100% managed by index.html for stability */
+    position: relative;
+    transition: background-color var(--transition-main), color var(--transition-main);
+}
+
+/* Global Unified Scrollbar Architecture */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(var(--v-theme-on-surface), 0.12);
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    transition: var(--transition-main);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--v-theme-on-surface), 0.25);
+    background-clip: content-box;
+}
+
+.v-theme--dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    background-clip: content-box;
+}
+
+.v-theme--dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+    background-clip: content-box;
+}
+
+/* 8. Global Aesthetic Foundations Continued */
+
+/* 9. Advanced Glassmorphism & Depth Layers */
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-main);
+}
+
+/* Unified Surface Architecture (SSOT) */
+body .base-surface-root {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.fade-up {
+    animation: fadeUp var(--transition-slow) forwards;
+    will-change: opacity, transform;
+}
+
+/* 10. Premium Card & Interaction Architecture */
+body .v-card--hover-lift {
+    background: var(--glass-bg);
+    transition: transform var(--transition-main), box-shadow var(--transition-main), border-color var(--transition-main);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+body .v-card--hover-lift:hover {
+    transform: perspective(1px) translateZ(0) translateY(-2px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(var(--v-theme-primary), 0.4);
+    z-index: 2;
+}
+
+/* Premium Image Interaction within List */
+.post-list-item:hover .v-img__img {
+    transform: perspective(1px) translateZ(0) scale(1.05);
+}
+
+body .post-list-item .v-img__img {
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    transform: perspective(1px) translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 11. Markdown Content Enhancements */
+.markdown-body {
+    line-height: 1.8;
+    color: rgba(var(--v-theme-on-surface), 0.87);
+    font-size: 1.125rem;
+    font-variant-ligatures: common-ligatures;
+    letter-spacing: var(--letter-spacing-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.markdown-body p {
+    margin-bottom: 1.5rem;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-heading);
+}
+
+.v-theme--dark .markdown-body h1,
+.v-theme--dark .markdown-body h2,
+.v-theme--dark .markdown-body h3 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.markdown-body li {
+    margin-bottom: 0.5rem;
+}
+
+.img-hover-zoom {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 1;
+}
+
+body .img-hover-zoom:hover {
+    transform: perspective(1px) translateZ(0) scale(1.015);
+    box-shadow: var(--shadow-xl);
+    z-index: 2;
+}
+
+.markdown-image-wrapper {
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    margin: 1.5rem auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: fit-content;
+}
+
+.markdown-body img {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    cursor: zoom-in;
+    transform-origin: center center;
+}
+
+/* Limit Mermaid diagrams size */
+.markdown-body .mermaid svg,
+.markdown-body svg.mermaid {
+    max-width: 100% !important;
+    max-height: 60vh !important;
+    height: auto !important;
+    margin: 1.5rem auto !important;
+    display: block;
+    cursor: zoom-in;
+}
+
+.markdown-body figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.markdown-body figcaption {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.markdown-body blockquote {
+    border-left: 4px solid rgb(var(--v-theme-primary));
+    background: rgba(var(--v-theme-primary), 0.05);
+    padding: 1.5rem 2rem;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: 2rem 0;
+    font-style: italic;
+}
+
+
+/* 12. Premium Code Block Enhancements */
+.markdown-body .highlight {
+    position: relative;
+    margin: 2.5rem 0;
+    border-radius: var(--radius-md);
+    background: #1e1e1e !important;
+
+    /* Premium dark background */
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+}
+
+/* Mac-like window controls */
+.markdown-body .highlight::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 1.25rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f56;
+    box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.markdown-body .highlight pre {
+    margin: 0 !important;
+    padding: 3.5rem 1.5rem 1.5rem 1.5rem !important;
+    /* Space for the mac buttons and label */
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+
+    background: transparent !important;
+    /* Override Hugo defaults */
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* The dynamic language label extracted from Hugo's data-lang */
+.markdown-body .highlight pre code[data-lang]::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 1.2rem;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom-left-radius: var(--radius-md);
+    pointer-events: none;
+
+    user-select: none;
+    z-index: 3;
+    letter-spacing: 0.1em;
+}
+
+.markdown-body .highlight pre code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* 13. Readability & Focus Overrides */
+/* Suppress default browser outline on pointer-driven interactions */
+body .v-chip:focus:not(:focus-visible),
+body .v-card--hover-lift:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Restore visible focus ring for keyboard navigation (accessibility) */
+body .v-chip:focus-visible {
+    outline: 2px solid rgb(var(--v-theme-primary));
+    outline-offset: 2px;
+}
+
+body .v-card--hover-lift:focus-visible {
+    outline: 2px solid rgb(var(--v-theme-primary));
+    outline-offset: 4px;
+    border-color: rgba(var(--v-theme-primary), 0.5);
+}
+
+/* 14. UI Component Overrides & Dark Mode Refinements */
+
+/* [Dark Mode] Replace harsh white holographic sweep with primary-tinted sweep */
+.v-theme--dark .v-card--hover-lift::after {
+    background: linear-gradient(45deg,
+            transparent 45%,
+            rgba(var(--v-theme-primary), 0.18) 50%,
+            transparent 55%);
+}
+
+/* [Dark Mode] Shift inner glow from raw gradient to a primary-tinted glow */
+.v-theme--dark .v-card--hover-lift::before {
+    background: linear-gradient(135deg, rgba(var(--v-theme-primary), 0.12), transparent);
+}
+
+
+/* Premium Button Architecture */
+body .v-btn {
+    border-radius: var(--radius-md);
+    /* Unified with Chips/Pagination */
+
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    transition: transform var(--transition-main), box-shadow var(--transition-main), background-color var(--transition-main), border-color var(--transition-main);
+    position: relative;
+    z-index: 1;
+}
+
+.v-btn:hover {
+    z-index: 2;
+}
+
+/* Elevated/Primary Buttons Overrides */
+body .v-btn--elevated,
+body .v-btn--variant-elevated {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+}
+
+body .v-btn--elevated:hover,
+body .v-btn--variant-elevated:hover {
+    box-shadow: var(--shadow-md);
+    /* Maintain perspective and layer */
+    transform: perspective(1px) translateZ(0) translateY(-2px);
+}
+
+/* Premium Inputs - Safe Glassmorphism (Preserves Notch) */
+body .v-field--variant-outlined {
+    background: var(--glass-bg);
+    border-radius: var(--radius-md);
+    transition: var(--transition-main);
+}
+
+body .v-field--variant-outlined .v-field__outline {
+    --v-field-border-opacity: 1;
+    color: var(--glass-border);
+}
+
+body .v-field--focused.v-field--variant-outlined .v-field__outline {
+    color: rgb(var(--v-theme-primary));
+    --v-field-border-width: 2px;
+}
+
+body .v-field--variant-outlined .v-label.v-field-label--floating {
+    /* Subtle adjustment to avoid collision with thick borders if needed, 
+       but keeping it standard enough for stability */
+    background: transparent;
+}
+
+/* Footer Legibility */
+body .v-footer {
+    border-top: 1px solid var(--glass-border);
+}
+
+.footer-main {
+    animation-delay: 0.5s;
+}
+
+body .v-theme--dark .v-footer {
+    background: rgba(var(--v-theme-surface), 0.98);
+    border-top: 1px solid var(--glass-border);
+}
+
+body .v-theme--dark .v-footer .opacity-70 {
+    opacity: 0.95;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+body .v-theme--dark .v-footer .v-btn {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* -----------------------------------------
+   14. Native Material Components Upgrade
+   ----------------------------------------- */
+
+body /* Floating Glass Panels (Drawer, body Header, body Menus) - High Opacity for readability without backdrop-filter */
+.v-navigation-drawer.glass-panel,
+body .sticky-nav.glass-panel,
+body .v-menu .glass-panel {
+    background: rgba(var(--v-theme-surface), 0.95);
+}
+
+body .v-theme--dark .v-navigation-drawer.glass-panel,
+body .v-theme--dark .sticky-nav.glass-panel,
+body .v-theme--dark .v-menu .glass-panel {
+    background: rgba(var(--v-theme-surface), 0.98);
+}
+
+/* Premium Lists & Menus — scoped to navigation contexts */
+body .v-list {
+    border-radius: var(--radius-md);
+}
+
+
+body /* Apply spacing and lift only for navigation drawer/menu lists, body not dense result lists */
+.v-navigation-drawer .v-list-item,
+body .v-menu .v-list-item {
+    border-radius: var(--radius-md);
+    margin: 4px 8px;
+
+    transition: transform var(--transition-main), box-shadow var(--transition-main), background-color var(--transition-main);
+    position: relative;
+    z-index: 1;
+}
+
+body .v-navigation-drawer .v-list-item:hover,
+body .v-menu .v-list-item:hover {
+    transform: perspective(1px) translateZ(0) translateY(-2px);
+    background: rgba(var(--v-theme-primary), 0.1);
+    box-shadow: var(--shadow-md);
+    z-index: 2;
+}
+
+/* Organic Pagination */
+body .v-pagination__item,
+body .v-pagination__navigation {
+    border-radius: var(--radius-md);
+    /* Increased for harmony */
+
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-main), box-shadow var(--transition-main), border-color var(--transition-main);
+    margin: 0 4px;
+    position: relative;
+    z-index: 1;
+}
+
+body .v-pagination__item:hover,
+body .v-pagination__navigation:hover {
+    transform: perspective(1px) translateZ(0) translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(var(--v-theme-primary), 0.3);
+    z-index: 2;
+}
+
+/* Elevated Chips / Tags */
+body .v-chip {
+    border-radius: var(--radius-md);
+    /* Unified with Buttons/Pagination */
+
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+    transition: transform var(--transition-main), box-shadow var(--transition-main);
+    /* Ensure chips don't push layout when lifting */
+    margin: 4px 8px 4px 0;
+    vertical-align: middle;
+    /* Rendering Stability: Prevent text jitter and blur during transform */
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body .v-chip:hover {
+    transform: perspective(1px) translateY(-2px);
+    border-color: rgba(var(--v-theme-primary), 0.5);
+    box-shadow: var(--shadow-md);
+}
+
+/* Secondary Chip Hover Refinement */
+body .v-chip.text-secondary:hover {
+    border-color: rgba(var(--v-theme-secondary), 0.5);
+}
+
+
+/* Accessibility: Boost tonal chip background opacity in light mode for higher contrast */
+body:not(.v-theme--dark) .v-chip--variant-tonal .v-chip__underlay {
+    opacity: 0.22;
+}
+
+body:not(.v-theme--dark) .v-chip--variant-tonal:hover .v-chip__underlay {
+    opacity: 0.3;
+}
+
+body .v-theme--dark .v-chip {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Alerts & Skeleton Loaders */
+body .v-alert {
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+}
+
+body .v-skeleton-loader {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+
+/* 16. SSOT & Structural Improvements */
+
+/* AppBar border managed by CSS (SSOT — removes inline-style dependency in App.js) */
+body .sticky-nav.v-app-bar {
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.v-card--hover-lift .v-img {
+    transition: var(--transition-main);
+}
+
+/* Global v-img safety reset to prevent sub-pixel background bleed */
+body .v-img {
+    background: transparent;
+}
+
+body .v-img .v-img__img {
+    display: block;
+}
+
+
+/* Dark mode card border depth: soften glass-border for deep palettes */
+body .v-theme--dark .v-card--hover-lift {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+body .v-theme--dark .v-card--hover-lift:hover {
+    border-color: rgba(var(--v-theme-primary), 0.4);
+    box-shadow: 0 12px 24px -10px var(--mesh-c1);
+}
+
+
+/* 19. Premium Link Architecture */
+a {
+    color: rgb(var(--v-theme-primary));
+    text-decoration: none;
+    transition: var(--transition-main);
+}
+
+.markdown-body a {
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 0 rgba(var(--v-theme-primary), 0.15);
+    padding: 0 2px;
+    margin: 0 -2px;
+    border-radius: var(--radius-sm);
+}
+
+.markdown-body a:hover {
+    box-shadow: inset 0 -2.5rem 0 0 rgba(var(--v-theme-primary), 0.08);
+    color: rgb(var(--v-theme-primary));
+}
+
+.v-theme--dark .markdown-body a {
+    box-shadow: inset 0 -2px 0 0 rgba(var(--v-theme-primary), 0.3);
+}
+
+.v-theme--dark .markdown-body a:hover {
+    box-shadow: inset 0 -2.5rem 0 0 rgba(var(--v-theme-primary), 0.15);
+}
+
+/* 20. Vuetify Class Overrides for Unified Design */
+body .rounded-3xl {
+    border-radius: var(--radius-lg);
+}
+
+body .rounded-xl {
+    border-radius: var(--radius-md);
+}
+
+body .rounded-pill {
+    border-radius: 9999px;
+}
+
+/* 21. Premium Table Architecture */
+.markdown-body table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    box-shadow: var(--shadow-sm);
+}
+
+.markdown-body th,
+.markdown-body td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid var(--glass-border);
+    vertical-align: middle;
+}
+
+.markdown-body th {
+    background: rgba(var(--v-theme-primary), 0.05);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: rgb(var(--v-theme-primary));
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+.markdown-body tr:last-child td {
+    border-bottom: none;
+}
+
+.markdown-body tr:nth-child(even) {
+    background: rgba(var(--v-theme-on-surface), 0.02);
+}
+
+.markdown-body tr:hover td {
+    background: rgba(var(--v-theme-primary), 0.04);
+    transition: background var(--transition-fast);
+}
+
+/* Responsive Table Wrapper */
+@media (max-width: 768px) {
+    .markdown-body table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* 22. Basic Mermaid Diagram Support */
+.mermaid {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    background: var(--v-theme-surface);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.mermaid svg {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* 23. Universal Lightbox Architecture */
+body .lightbox-dialog {
+    box-shadow: none;
+    background: transparent;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* Align close button to the right */
+    gap: 12px;
+    max-width: 95%;
+}
+
+.lightbox-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    object-fit: contain;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body .lightbox-close-btn {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    backdrop-filter: blur(8px);
+    transition: var(--transition-main);
+}
+
+body .lightbox-close-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.lightbox-content-scrollable {
+    width: max-content;
+    height: auto;
+    min-width: 80vw;
+    max-width: 100%;
+    max-height: 85vh;
+    padding: 1rem;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Ensure tall content starts from the top and doesn't cut off */
+    background: rgb(var(--v-theme-surface));
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Custom Rounded Scrollbar for Lightbox */
+.lightbox-content-scrollable::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.lightbox-content-scrollable::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    /* very light track */
+    border-radius: var(--radius-md);
+}
+
+.lightbox-content-scrollable::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.lightbox-content-scrollable::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.v-theme--dark .lightbox-content-scrollable::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.v-theme--dark .lightbox-content-scrollable::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.v-theme--dark .lightbox-content-scrollable::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+body .lightbox-content-scrollable svg {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    /* Remove height constraint so it can scroll */
+    margin: auto 0;
+    /* Center vertically if container is taller, but keep top aligned if it overflows */
+}
+
+.v-theme--dark .lightbox-content-scrollable {
+    background: #121212;
+    /* Solid dark background */
+}
